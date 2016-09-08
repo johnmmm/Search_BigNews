@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News searching</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+</head>
+<body grey lighten-3>
+{% include "navbar.html" %}
+
+    <div style="height: 300px"></div>
+
+    <div class="container">
+        <form action="/query1/" method="post">{% csrf_token %}
+            <div class="input-field">
+                <div class="row">
+                    <p class="browser-default col s2 offset-s2">请输入关键词：</p>                   
+                    <input type="text" name="q" class="col s4 offset-s1">
+                </div>
+                <div class="row">
+                    <div class="col offset-s8 s2">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <center>
+        <div class="footer">
+            <p>&copy; john_mmm</p>
+        </div>
+    </center>
+</body>
+</html>
