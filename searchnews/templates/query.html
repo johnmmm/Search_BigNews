@@ -5,7 +5,9 @@
     <title>Search Result</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script type="text/javascript" src="../static/jquery-3.1.0.slim.min.js"></script>
 </head>
+
 <body>
 
 {% include "navbar.html" %}
@@ -16,8 +18,9 @@
         <ul class="collection with-header content" id="list">
             {% for page in results %}
                 <li class="collection-item">
-                    <div>
+                    <div class="keyword">
                         <a href="/news/{{ page.id }}">{{ page.title }}</a>
+                        <span class="secondary-content">{{ page.time }}</span>
                     </div>
                 </li>
             {% endfor %}
@@ -49,6 +52,8 @@
             <li class="waves-effect"><a href="#">23</a></li>
             <li class="waves-effect"><a href="#">24</a></li>
             <li class="waves-effect"><a href="#">25</a></li>
+            <li class="waves-effect"><a href="#">26</a></li>
+            <li class="waves-effect"><a href="#">27</a></li>
         </ul>
     </div>
     <script>
@@ -58,14 +63,14 @@
         const lis = $list.children('li');
         const ctrls = $controller.children('li');
         const len = lis.length;
-        const size = parseInt(len / 10) + 1;
+        const size = parseInt(len / 20) + 1;
 
         $(document).ready(function() {
-            for (let i = size; i < 25; i++) {
+            for (let i = size; i < 27; i++) {
                 $(ctrls[i]).hide();
             }
 
-            for (let i = 10; i < len; i++) {
+            for (let i = 20; i < len; i++) {
                 $(lis[i]).hide();
             }
         });
@@ -76,15 +81,35 @@
                 $(lis[i]).hide();
             }
 
-            for (let i = pageId * 10; i < (pageId + 1) * 10; i++) {
+            for (let i = pageId * 20; i < (pageId + 1) * 20; i++) {
                 $(lis[i]).show();
             }
 
-            for (let i = 0; i < 25; i++) {
+            for (let i = 0; i < 27; i++) {
                 $(ctrls).attr('class', 'wave-effect');
             }
 
             $(this).attr('class', 'active blue lighten-4');
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() 
+        {
+            var dict = {{ dict|safe }};
+            var key=dict['keywords'];
+            console.log(key)
+            var keyword = key.split('_');
+            console.log(keyword)
+            $(".keyword").html(function() 
+            {
+                var txt = $(this).html();
+                for (i=0; i < keyword.length; i++)
+                {
+                    txt = txt.replace(keyword[i],"<font color=\"red\">"+keyword[i]+"</font>");
+                    console.log(keyword[i])
+                } 
+                return txt;
+            });           
         });
     </script>
     <center>

@@ -21,6 +21,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'collection.views.index', name='home'),
-    url(r'^query\d+', 'collection.views.query', name='query'),
+    url(r'^query1/', 'collection.views.query', name='query'),
     url(r'^news/', 'collection.views.news', name='news'),
 ] 

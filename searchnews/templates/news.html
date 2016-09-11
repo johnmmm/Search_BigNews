@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <script type="text/javascript" src="../static/jquery-3.1.0.slim.min.js"></script>
 </head>
 <body>
 
 {% include "navbar.html" %}
 
-    <div class="container">
+    <div class="container" id="keyword">
         <h1>
             {{ page.title }}
         </h1>
@@ -19,9 +20,29 @@
         </article>
 
         <h3>Hyperlink</h3>
-        <article>
+        <a href={{page.refs}}>
             {{ page.refs }}
-        </article>
+        </a>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() 
+        {
+            var dict = {{ dict|safe }};
+            var key=dict['keywords'];
+            console.log(key)
+            var keyword = key.split('_');
+            console.log(keyword)
+            $("#keyword").html(function() 
+            {
+                var txt = $(this).html();
+                for (i=0; i < keyword.length; i++)
+                {
+                    txt = txt.replace(keyword[i],"<font color=\"red\">"+keyword[i]+"</font>");
+                    console.log(keyword[i])
+                } 
+                return txt;
+            });           
+        });
+    </script>
 </body>
 </html>
